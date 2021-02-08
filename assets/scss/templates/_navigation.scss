@@ -33,6 +33,7 @@
 
 /* search */
 .search-btn {
+  color: $text-color-dark;
   border: 0;
   background: transparent;
   border-right: 1px solid $border-color;
@@ -70,6 +71,7 @@
 }
 
 .search-close {
+  color: $black;
   position: absolute;
   right: 5px;
   top: 50%;
