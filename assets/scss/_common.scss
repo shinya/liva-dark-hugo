@@ -205,3 +205,7 @@ textarea.form-control{
 a.bg-primary:focus, a.bg-primary:hover, button.bg-primary:focus, button.bg-primary:hover{
   background: $primary-color !important;
 }
+
+.footer-list {
+  color: $text-color-dark;
+}
