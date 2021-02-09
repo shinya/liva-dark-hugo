@@ -20,6 +20,12 @@
   {{ "<!--Favicon-->" | safeHTML }}
   <link rel="icon" href="{{ `images/spade.svg` | absURL }} " type="image/svg+xml">
 
+  {{ template "_internal/opengraph.html" . }}
+{{ if .Params.Image }}<meta property="og:image" content="{{ .Params.Image | absURL }}">{{ else }}<meta property="og:image" content="{{ .Site.Params.image | absURL }}" />{{ end }}
+
+  {{ template "_internal/twitter_cards.html" . }}
+  {{ if .Params.Image }}<meta property="twitter:image" content="{{ .Params.Image | absURL }}">{{ else }}<meta property="twitter:image" content="{{ .Site.Params.image | absURL }}" />{{ end }}
+
   {{ "<!-- google analitycs -->" | safeHTML }}
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.googleAnalitycsID }}"></script>
