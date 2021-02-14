@@ -19,6 +19,7 @@
 
   {{ "<!--Favicon-->" | safeHTML }}
   <link rel="icon" href="{{ `images/spade.svg` | absURL }} " type="image/svg+xml">
+  <meta name="theme-color" content="#FF6D33">
 
   {{ template "_internal/opengraph.html" . }}
 {{ if .Params.Image }}<meta property="og:image" content="{{ .Params.Image | absURL }}">{{ else }}<meta property="og:image" content="{{ .Site.Params.image | absURL }}" />{{ end }}
