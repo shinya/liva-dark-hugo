@@ -49,8 +49,10 @@
       {{ end }}
     </ul>
   </div>
+{{ if site.Params.advertisement.enable }}
   <!-- advertisement -->
   <div class="widget">
-    <img src="{{`images/promotion.png` | absURL}}" alt="" class="img-fluid">
+    <img src="{{ site.Params.advertisement.promotion_image | absURL}}" alt="" class="img-fluid">
   </div>
+{{ end }}
 </div>

@@ -16,6 +16,18 @@
           <span>{{ .PublishDate.Format "2006年01月02日 15:04" }}</span>
           {{ end }}
         </div>
+
+        {{ if isset .Params "tags" }}
+        {{ if not (eq (len .Params.tags) 0) }}
+        <div class="article-tags">
+          {{ range .Params.tags }}
+          <li class="list-inline-item"><a class="d-block p-2 bg-primary text-white"
+              href="{{ `tags/` | relLangURL }}{{ . | urlize | lower }}">{{ . }}</a></li>
+          {{ end }}
+        </div>
+        {{ end }}
+        {{ end }}
+
         {{ if .Params.image }}
         <img src="{{ .Params.Image | absURL }}" class="img-fluid w-100 mb-4" alt="{{ .Title | markdownify }}">
         {{ end }}
