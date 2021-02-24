@@ -1,0 +1,32 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:dc="http://purl.org/dc/elements/1.1"
+     xmlns:content="http://purl.org/rss/1.0/modules/content">
+    <channel>
+        <title>{{ .Site.Title }}</title>
+        <link>{{ .Permalink }}</link>
+        <language>{{ .Site.LanguageCode }}</language>
+        <description>{{ .Site.Params.description }}</description>
+        <copyright>{{ .Site.Copyright }}</copyright>
+        <lastBuildDate>{{ .Site.LastChange.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
+        <atom:link href="{{ .Permalink }}" rel="self" type="application/rss+xml" />
+
+        {{ range .Data.Pages }}
+        <item>
+            <title>{{ .Title }}</title>
+            <link>{{ .Permalink | absURL }}</link>
+            <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+            <guid>{{ .Permalink | absURL }}</guid>
+            <dc:creator>{{ .Site.Params.author }}</dc:creator>
+            {{ if .Params.Image }}
+            <media:content type="image/jpeg" medium="image" width="1200" height="1200"
+                           url="{{ .Params.Image | absURL }}" />
+            {{ else }}
+            <media:content type="image/jpeg" medium="image" width="1200" height="800"
+                           url="{{ .Site.Params.image | absURL }}" />
+            {{ end }}
+            <description>{{ .Summary | safeHTML }}</description>
+            <content:encoded>{{ .Content | safeHTML }}</content:encoded>
+        </item>
+        {{ end }}
+    </channel>
+</rss>
