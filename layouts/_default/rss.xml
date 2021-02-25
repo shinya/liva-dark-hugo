@@ -27,9 +27,11 @@
             {{ if .Params.Image }}
             <media:content type="image/jpeg" medium="image" width="1200" height="1200"
                            url="{{ .Params.Image | absURL }}" />
+            <image>{{ .Params.Image | absURL }}</image>
             {{ else }}
             <media:content type="image/jpeg" medium="image" width="1200" height="800"
                            url="{{ .Site.Params.image | absURL }}" />
+            <image>{{ .Site.Params.image | absURL }}</image>
             {{ end }}
             {{ if .Params.categories -}}
             <dc:subject>{{ range .Params.categories }}{{ . | urlize }},{{ end }}</dc:subject>
