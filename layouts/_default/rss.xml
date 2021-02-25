@@ -1,20 +1,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"
      xmlns:dc="http://purl.org/dc/elements/1.1"
-     xmlns:content="http://purl.org/rss/1.0/modules/content">
+     xmlns:content="http://purl.org/rss/1.0/modules/content"
+     xmlns:media="http://search.yahoo.com/mrss/">
     <channel>
-        <title>{{ .Site.Title }}</title>
+        <atom:link href="{{ .Permalink }}" rel="self" type="application/rss+xml" />
+        <title>{{ .Site.Params.caption }}</title>
         <link>{{ .Permalink }}</link>
         <language>{{ .Site.LanguageCode }}</language>
         <description>{{ .Site.Params.description }}</description>
         <copyright>{{ .Site.Copyright }}</copyright>
         <lastBuildDate>{{ .Site.LastChange.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
-        <atom:link href="{{ .Permalink }}" rel="self" type="application/rss+xml" />
 
-        {{ range .Data.Pages }}
+        {{- $pages := (where .Site.Pages ".Section" "blog") -}}
+        {{- $limit := .Site.Params.rssLimit -}}
+        {{- if ge $limit 1 -}}
+        {{- $pages = $pages | first $limit -}}
+        {{- end -}}
+        {{ range $pages }}
         <item>
             <title>{{ .Title }}</title>
             <link>{{ .Permalink | absURL }}</link>
             <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+            <dc:date>{{ .Date.Format "2006-01-02T15:04:05-0700" | safeHTML }}</dc:date>
             <guid>{{ .Permalink | absURL }}</guid>
             <dc:creator>{{ .Site.Params.author }}</dc:creator>
             {{ if .Params.Image }}
@@ -24,8 +31,10 @@
             <media:content type="image/jpeg" medium="image" width="1200" height="800"
                            url="{{ .Site.Params.image | absURL }}" />
             {{ end }}
-            <description>{{ .Summary | safeHTML }}</description>
-            <content:encoded>{{ .Content | safeHTML }}</content:encoded>
+            {{ if .Params.categories -}}
+            <dc:subject>{{ range .Params.categories }}{{ . | urlize }},{{ end }}</dc:subject>
+            {{ end -}}
+            <description>{{- .Summary | html -}}</description>
         </item>
         {{ end }}
     </channel>
