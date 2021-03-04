@@ -41,5 +41,7 @@
     </div>
   </div>
 </section>
-
+{{ if .Site.Params.recentPost.enablePost }}
+  {{- partial "recent_post.html" . -}}
+{{ end}}
 {{ end }}
