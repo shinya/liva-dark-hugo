@@ -46,7 +46,9 @@
   <meta property="og:image" content="{{ .Site.Params.image | absURL }}" />
   {{ end -}}
   {{ "<!--Twitter-->" | safeHTML }}
-  {{ template "_internal/twitter_cards.html" . -}}
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="{{ .Title }}"/>
+  <meta name="twitter:description" content="{{ .Summary}} "/>
   {{ if .Params.Image -}}
   <meta property="twitter:image" content="{{ .Params.Image | absURL }}">
   {{ else }}
